@@ -96,12 +96,12 @@ class Agent(object):
         :return:
         """
         buffer = self.exp_buffer.sample(self.args.batch_size)
-        states, actions, rewards, dones, next_states = buffer
+        states, actions, rewards, done, next_states = buffer
 
         states = torch.FloatTensor(states)
         actions = torch.tensor(actions, dtype=torch.int64)
         rewards = torch.FloatTensor(rewards)
-        done_mask = torch.BoolTensor(dones)
+        done_mask = torch.BoolTensor(done)
         next_states = torch.FloatTensor(next_states)
 
         s_a_values = self.eval_net(states).gather(1, actions.unsqueeze(-1)).squeeze(-1)

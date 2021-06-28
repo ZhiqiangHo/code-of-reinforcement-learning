@@ -26,8 +26,7 @@ class ExperienceBuffer:
         """
         indices = np.random.choice(len(self.buffer), batch_size, replace=False)
         states, actions, rewards, dones, next_states = zip(*[self.buffer[idx] for idx in indices])
-        return np.array(states), np.array(actions), np.array(rewards, dtype=np.float32), \
-               dones, np.array(next_states)
+        return np.array(states), np.array(actions), np.array(rewards, dtype=np.float32), dones, np.array(next_states)
 
     def sample_last(self):
         """
@@ -114,6 +113,7 @@ class Agent(object):
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
+
 
 def main():
     parser = argparse.ArgumentParser(description="The parameter of DQN")
